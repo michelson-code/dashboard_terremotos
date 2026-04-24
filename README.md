@@ -54,6 +54,6 @@ Acesse no seu navegador: http://127.0.0.1:8050/
 # 🧠 Visão Técnica
 Desenvolvido sob o pilar do rigor analítico, o projeto foca na experiência do usuário ao lidar com grandes volumes de dados. O layout foi otimizado para preencher a tela (100vh), garantindo que o mapa principal tenha destaque máximo sem comprometer a leitura dos indicadores secundários.
 
-![Painel-Dash]([url da img](https://github.com/michelson-code/dashboard_terremotos/blob/main/exemplo_painel.png))
+![Painel-Dash](https://github.com/michelson-code/dashboard_terremotos/blob/main/exemplo_painel.png?raw=true)
 
-# *Criador:* https://www.linkedin.com/in/7michelson/
+#### *Criador:* https://www.linkedin.com/in/7michelson/
