@@ -8,6 +8,8 @@ Mapeamento Geoespacial por Intensidade: Localização precisa de epicentros com 
 
 Análise de Frequência Diária: Identificação de picos de atividade sísmica no tempo.
 
+**Filtros Dinâmicos**: Filtragem simultânea por Magnitude Mínima e Escala de Magnitude (`magType`).
+
 Distribuição Estatística: Histograma de magnitudes para análise da frequência de eventos.
 
 KPIs Dinâmicos: Resumo instantâneo de eventos totais, magnitude máxima e média capturada no período.
@@ -37,14 +39,15 @@ Visualização: Plotly Express (Geo-scatter e Histogramas)
 Estilização: CSS Flexbox para layout responsivo (100% viewport height).
 
 # 🚀 Como Executar
-Clone o repositório:
-
-Bash
+1. Clone o repositório:
+```Bash
 git clone https://github.com/michelson-code/dashboard_terremotos.git
-Instale as dependências:
+```
+2. Instale as dependências:
 
-Bash
+```Bash
 pip install dash pandas plotly
+```
 Execute a aplicação:
 
 Bash
