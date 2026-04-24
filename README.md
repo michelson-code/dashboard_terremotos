@@ -63,6 +63,8 @@ Estilização: CSS Flexbox para layout responsivo (100% viewport height).
   python3 -m venv venv
   source venv/bin/activate
   ````
+
+  automático
   
   ```Bash
   pip install -r requirements.txt
