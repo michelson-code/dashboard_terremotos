@@ -1,7 +1,7 @@
-### 🌍 Monitoramento Sísmico Global: Observatório de Dados USGS
+# 🌍 Monitoramento Sísmico Global: Observatório de Dados USGS
 Este projeto consiste em um Dashboard Interativo de alta performance desenvolvido para visualização e análise de eventos sísmicos globais em tempo real. O sistema processa dados complexos da USGS para oferecer uma interface de exploração rápida e técnica.
 
-### 📊 O Projeto
+# 📊 O Projeto
 O dashboard utiliza a stack Python + Dash + Plotly para gerenciar milhares de registros simultâneos, apresentando:
 
 Mapeamento Geoespacial por Intensidade: Localização precisa de epicentros com escala de cores (barra de magnitude) e tamanho proporcional à energia liberada.
@@ -12,7 +12,7 @@ Distribuição Estatística: Histograma de magnitudes para análise da frequênc
 
 KPIs Dinâmicos: Resumo instantâneo de eventos totais, magnitude máxima e média capturada no período.
 
-### 💾 Fonte e Integridade dos Dados
+# 💾 Fonte e Integridade dos Dados
 Os dados são extraídos do programa oficial da USGS (United States Geological Survey).
 
 Fonte: USGS Earthquake Catalog
@@ -25,7 +25,7 @@ Volumetria: +11.600 eventos registrados.
 
 Nota de Integridade: A utilização de fontes auditadas como a USGS reforça o compromisso deste projeto com a precisão científica e a transparência da informação.
 
-### 🛠️ Tecnologias Utilizadas
+# 🛠️ Tecnologias Utilizadas
 Linguagem: Python 3.12
 
 Manipulação de Dados: Pandas
@@ -36,7 +36,7 @@ Visualização: Plotly Express (Geo-scatter e Histogramas)
 
 Estilização: CSS Flexbox para layout responsivo (100% viewport height).
 
-### 🚀 Como Executar
+# 🚀 Como Executar
 Clone o repositório:
 
 Bash
@@ -51,5 +51,9 @@ Bash
 python main.py
 Acesse no seu navegador: http://127.0.0.1:8050/
 
-### 🧠 Visão Técnica
+# 🧠 Visão Técnica
 Desenvolvido sob o pilar do rigor analítico, o projeto foca na experiência do usuário ao lidar com grandes volumes de dados. O layout foi otimizado para preencher a tela (100vh), garantindo que o mapa principal tenha destaque máximo sem comprometer a leitura dos indicadores secundários.
+
+![Painel-Dash]([url da img](https://github.com/michelson-code/dashboard_terremotos/blob/main/exemplo_painel.png))
+
+# *Criador:* https://www.linkedin.com/in/7michelson/
