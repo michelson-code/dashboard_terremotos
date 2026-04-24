@@ -1,9 +1,3 @@
-Excelente escolha. Trocar o nome para main.py é o padrão da indústria para o arquivo de entrada de um projeto, o que facilita muito a leitura do seu repositório por outros desenvolvedores e recrutadores.
-
-Fiz os ajustes no README.md para refletir essa mudança e alterei a descrição técnica para evitar o termo "Mapa de Calor" (Heatmap), substituindo-o por Mapeamento Geoespacial por Intensidade, que descreve com precisão a escala de cores e o tamanho das bolhas que você usou.
-
-Aqui está o conteúdo atualizado para você copiar no seu GitHub:
-
 🌍 Monitoramento Sísmico Global: Observatório de Dados USGS
 Este projeto consiste em um Dashboard Interativo de alta performance desenvolvido para visualização e análise de eventos sísmicos globais em tempo real. O sistema processa dados complexos da USGS para oferecer uma interface de exploração rápida e técnica.
 
