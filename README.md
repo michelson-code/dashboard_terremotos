@@ -40,19 +40,46 @@ Estilização: CSS Flexbox para layout responsivo (100% viewport height).
 
 # 🚀 Como Executar
 1. Clone o repositório:
-```Bash
-git clone https://github.com/michelson-code/dashboard_terremotos.git
-```
-2. Instale as dependências:
+  ```Bash
+  git clone https://github.com/michelson-code/dashboard_terremotos.git
+  ```
 
-```Bash
-pip install dash pandas plotly
-```
-Execute a aplicação:
+2. Acesse o diretório do projeto:
+   ```bash
+   cd dashboard_terremotos
+   ```
+4. Instale as dependências:
 
-Bash
-python main.py
-Acesse no seu navegador: http://127.0.0.1:8050/
+  Crie e ative um ambiente virtual (Recomendado):
+  caso prefira um abiente virtua, se não pode pular esse passo;
+
+  ### No Windows
+  ```bash
+  python -m venv venv
+  venv\Scripts\activate
+  ```
+  ### No Linux
+  ```bash
+  python3 -m venv venv
+  source venv/bin/activate
+  ````
+  
+  ```Bash
+  pip install -r requirements.txt
+  ```
+  ou manualmente
+  
+  ```
+  pip install numpy dash plotly pandas
+  ```
+
+4. Execute a aplicação:
+
+  ```Bash
+  python main.py
+  ```
+
+5. *Acesse no seu navegador:* http://127.0.0.1:8050/
 
 # 🧠 Visão Técnica
 Desenvolvido sob o pilar do rigor analítico, o projeto foca na experiência do usuário ao lidar com grandes volumes de dados. O layout foi otimizado para preencher a tela (100vh), garantindo que o mapa principal tenha destaque máximo sem comprometer a leitura dos indicadores secundários.
