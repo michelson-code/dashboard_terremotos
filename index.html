@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Monitoramento Sísmico - Portfólio Jr</title>
+    <script src="https://cdn.plot.ly/plotly-2.24.1.min.js"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background-color: #f4f7f6; margin: 0; padding: 20px; }
+        h1 { text-align: center; color: #2c3e50; }
+        
+        .header-container { display: flex; gap: 20px; margin-bottom: 20px; }
+        .filter-box { flex: 2; background: white; padding: 15px; border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); display: flex; align-items: center; gap: 15px; }
+        .kpi-card { flex: 1; background: white; padding: 10px; border-radius: 10px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        
+        .visual-main { display: flex; gap: 20px; height: 65vh; margin-bottom: 20px; }
+        #mapa { flex: 2; background: white; border-radius: 10px; }
+        .side-charts { flex: 1; display: flex; flex-direction: column; gap: 10px; }
+        .chart-container { flex: 1; background: white; border-radius: 10px; padding: 10px; }
+
+        .table-section { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .table-wrapper { max-height: 300px; overflow-y: auto; margin-top: 10px; border: 1px solid #eee; }
+        table { width: 100%; border-collapse: collapse; font-size: 13px; }
+        th { background: #2c3e50; color: white; padding: 10px; position: sticky; top: 0; }
+        td { padding: 8px; border-bottom: 1px solid #eee; text-align: left; }
+    </style>
+</head>
+<body>
+
+    <h1>Monitoramento Sísmico Global</h1>
+
+    <div class="header-container">
+        <div class="filter-box">
+            <label><b>Magnitude Mínima:</b> <span id="mag-val">2.5</span></label>
+            <input type="range" id="mag-slider" min="0" max="8" step=0.5 value="2.5" style="flex:1">
+        </div>
+        <div class="kpi-card"><span>Total de Eventos</span><br><b id="total-eventos" style="font-size:24px; color:#2980b9">0</b></div>
+        <div class="kpi-card"><span>Mag Máxima</span><br><b id="max-mag" style="font-size:24px; color:#c0392b">0.0</b></div>
+    </div>
+
+    <div class="visual-main">
+        <div id="mapa"></div>
+        <div class="side-charts">
+            <div id="hist" class="chart-container"></div>
+            <div id="series" class="chart-container"></div> </div>
+    </div>
+
+    <div class="table-section">
+        <h3>Inspeção de Dados (Planilha)</h3>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Data (Brasília)</th>
+                        <th>Lat (°)</th>
+                        <th>Lon (°)</th>
+                        <th>Mag</th>
+                        <th>Local</th>
+                    </tr>
+                </thead>
+                <tbody id="table-body"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        const url = 'https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.csv';
+        let rawData = [];
+
+        d3.csv(url).then(data => {
+            rawData = data.map(d => {
+                const date = new Date(d.time);
+                const brDate = new Date(date.getTime() - (3 * 60 * 60 * 1000));
+                return {
+                    ...d,
+                    mag: +d.mag,
+                    lat: +d.latitude,
+                    lon: +d.longitude,
+                    brTime: brDate.toLocaleString('pt-BR'),
+                    dateOnly: brDate.toISOString().split('T')[0] // Para agrupar por dia
+                };
+            });
+            update(2.5);
+        });
+
+        document.getElementById('mag-slider').addEventListener('input', e => {
+            document.getElementById('mag-val').innerText = e.target.value;
+            update(+e.target.value);
+        });
+
+        function update(minMag) {
+            const filtered = rawData.filter(d => d.mag >= minMag);
+            
+            // KPIs
+            document.getElementById('total-eventos').innerText = filtered.length;
+            const max = filtered.length > 0 ? Math.max(...filtered.map(d => d.mag)).toFixed(1) : "0.0";
+            document.getElementById('max-mag').innerText = max;
+
+            // 1. MAPA
+            Plotly.newPlot('mapa', [{
+                type: 'scattergeo', lat: filtered.map(d=>d.lat), lon: filtered.map(d=>d.lon),
+                marker: { size: filtered.map(d=>d.mag*3), color: filtered.map(d=>d.mag), colorscale: 'Reds' },
+                text: filtered.map(d=>`${d.place}<br>${d.brTime}`)
+            }], { geo: {projection:{type:'natural earth'}}, margin: {t:0, b:0, l:0, r:0} });
+
+            // 2. HISTOGRAMA
+            Plotly.newPlot('hist', [{ x: filtered.map(d=>d.mag), type: 'histogram', marker: {color:'#e67e22'} }], 
+                { title: 'Distribuição Magnitude', margin: {t:30, b:30, l:30, r:10}, height: 200 });
+
+            // 3. SÉRIE TEMPORAL (Eventos por Dia)
+            const counts = d3.rollup(filtered, v => v.length, d => d.dateOnly);
+            const sortedDates = Array.from(counts.keys()).sort();
+            Plotly.newPlot('series', [{
+                x: sortedDates,
+                y: sortedDates.map(d => counts.get(d)),
+                type: 'scatter', mode: 'lines+markers', line: {shape: 'spline', color: '#2980b9'}
+            }], { title: 'Eventos por Dia', margin: {t:30, b:30, l:30, r:10}, height: 200 });
+
+            // 4. PLANILHA
+            document.getElementById('table-body').innerHTML = filtered.slice(0, 100).map(d => `
+                <tr>
+                    <td>${d.brTime}</td>
+                    <td>${d.lat.toFixed(2)}</td>
+                    <td>${d.lon.toFixed(2)}</td>
+                    <td><b>${d.mag}</b></td>
+                    <td>${d.place}</td>
+                </tr>
+            `).join('');
+        }
+    </script>
+</body>
+</html>
