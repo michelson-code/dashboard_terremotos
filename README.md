@@ -1,4 +1,7 @@
 # 🌍 Monitoramento Sísmico Global: Observatório de Dados USGS
+
+🌐 **[Acesse o Dashboard Interativo ao Vivo (Live Demo)](https://michelson-code.github.io/dashboard_terremotos/)**
+
 Este projeto consiste em um Dashboard Interativo de alta performance desenvolvido para visualização e análise de eventos sísmicos globais em tempo real. O sistema processa dados complexos da USGS para oferecer uma interface de exploração rápida e técnica.
 
 # 📊 O Projeto
